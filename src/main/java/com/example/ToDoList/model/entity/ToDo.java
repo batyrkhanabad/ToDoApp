@@ -1,5 +1,6 @@
-package com.example.ToDoList.model;
+package com.example.ToDoList.model.entity;
 
+import com.example.ToDoList.model.entity.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,14 +8,17 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "to_do")
 public class ToDo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private String  title;
     private String description;
-    @Column(nullable = false)
     private LocalDate date;
-    private String status;
+    private boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

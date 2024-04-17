@@ -1,37 +1,39 @@
 package com.example.ToDoList.controller;
 
-import com.example.ToDoList.model.ToDo;
+import com.example.ToDoList.model.entity.ToDo;
 import com.example.ToDoList.service.ToDoService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/todos")
-@AllArgsConstructor
+@RequestMapping("api/v5/todos")
 public class ToDoController {
-    private ToDoService service;
+    private final ToDoService toDoService;
 
+    @Autowired
+    public ToDoController(ToDoService toDoService) {
+        this.toDoService = toDoService;
+    }
 
     @GetMapping
-    public List<ToDo> findAllToDo(){
-       return service.findAllToDo();
+    public List<ToDo> findAll() {
+        return toDoService.findAll();
     }
 
-    @PostMapping("/save_toDo")
-    public String saveToDo(@RequestBody ToDo toDo){
-        service.saveToDo(toDo);
-        return "Запрос успешно выполнен";
+    @PostMapping
+    public ToDo createToDo(@RequestBody ToDo toDo) {
+        return toDoService.createToDo(toDo);
     }
 
-    @PutMapping("/update_toDo")
-    public ToDo upDate(@RequestBody ToDo toDo){
-         return service.upDate(toDo);
+    @PutMapping("/{id}")
+    public ToDo upDateToDo(@PathVariable Long id, @RequestBody ToDo toDoDetails) {
+        return toDoService.upDateToDo(id, toDoDetails);
     }
 
-    @DeleteMapping("/delete_toDo/{id}")
-    public void deleteToDo(@PathVariable Long id){
-        service.deleteToDo(id);
+    @DeleteMapping("/{id}")
+    public void deleteToDo(@PathVariable Long id) {
+        toDoService.deleteToDo(id);
     }
 }
