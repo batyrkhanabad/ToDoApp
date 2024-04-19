@@ -1,4 +1,4 @@
-package com.example.ToDoList.mapper.impl;
+package com.example.ToDoList.mapper.Impl;
 
 import com.example.ToDoList.mapper.UserMapper;
 import com.example.ToDoList.model.dto.UserRequestDto;

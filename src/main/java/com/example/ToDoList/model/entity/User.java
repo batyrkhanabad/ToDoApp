@@ -1,5 +1,6 @@
 package com.example.ToDoList.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false, nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -24,6 +25,7 @@ public class User {
     @Column(nullable = false)
     private Boolean isDeleted = false;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customUser", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ToDo> todos;
 }

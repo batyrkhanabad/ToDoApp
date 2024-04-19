@@ -22,7 +22,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public List<User> getAllUsers() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 

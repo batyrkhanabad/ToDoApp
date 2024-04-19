@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ToDoList_db
+    url: jdbc:postgresql://localhost:5432/ToDo_db
     username: postgres
     password: postgresql
     driver-class-name: org.postgresql.Driver
@@ -15,4 +15,9 @@ spring:
           format_sql: true
 server:
   port: 8033
-
+  tomcat:
+    accesslog:
+      prefix: /WEB-INF/jsp
+  undertow:
+    accesslog:
+      suffix: .jsp

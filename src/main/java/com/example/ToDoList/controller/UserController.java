@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/v5/users")
 public class UserController {
     private final UserService userService;
 
@@ -20,12 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping(value = "/admin/findAll")
+    public List<User> findAll() {
+        return userService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public UserResponseDto createUser(@RequestBody UserRequestDto request) {
         return userService.createUser(request);
     }

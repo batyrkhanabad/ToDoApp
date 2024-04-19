@@ -1,14 +1,16 @@
 package com.example.ToDoList.model.entity;
 
-import com.example.ToDoList.model.entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
-@Table(name = "to_do")
+@Getter
+@Setter
+@Table(name = "todo")
 public class ToDo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +20,8 @@ public class ToDo {
     private LocalDate date;
     private boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", updatable = false)
+    @JsonIgnore
+    private User customUser;
 }
